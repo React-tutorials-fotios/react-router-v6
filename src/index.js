@@ -10,6 +10,7 @@ import {
   Navigate,
   Link,
   Outlet,
+  useParams,
 } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -19,7 +20,9 @@ root.render(
       <Route path="/" element={<Home />} />
       <Route path="/myapps" element={<Navigate replace to={"/learn"} />} />
       <Route path="/learn" element={<Learn />}>
-        <Route path="courses" element={<Courses />} />
+        <Route path="courses" element={<Courses />}>
+          <Route path=":courseID" element={<CourseId />} />
+        </Route>
         <Route path="bundles" element={<Bundles />} />
       </Route>
     </Routes>
@@ -58,6 +61,7 @@ function Courses() {
     <div>
       <h1>Courses list</h1>
       <h4>Course card</h4>
+      <Outlet />
     </div>
   );
 }
@@ -67,6 +71,15 @@ function Bundles() {
     <div>
       <h1>Bundles list</h1>
       <h4>Bundle card</h4>
+    </div>
+  );
+}
+
+function CourseId() {
+  const { courseID } = useParams();
+  return (
+    <div>
+      <h1>URL params is: {courseID}</h1>
     </div>
   );
 }
