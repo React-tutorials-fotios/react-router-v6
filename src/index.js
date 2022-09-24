@@ -11,6 +11,7 @@ import {
   Link,
   Outlet,
   useParams,
+  NavLink,
 } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -57,10 +58,36 @@ function Learn() {
 }
 
 function Courses() {
+  const courseList = ["React", "Angular", "Vue", "Nodejs"];
+  const randomCourseName =
+    courseList[Math.floor(Math.random() * courseList.length)];
   return (
     <div>
       <h1>Courses list</h1>
       <h4>Course card</h4>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quam,
+        repellendus delectus soluta provident sed ea. Possimus recusandae maxime
+        consequatur, quaerat animi autem reprehenderit ipsa quod mollitia quam
+        explicabo minima!
+      </p>
+
+      <NavLink
+        style={({ isActive }) => {
+          return {
+            backgroundColor: isActive ? "red" : "yellow",
+          };
+        }}
+        to={`/learn/courses/${randomCourseName}`}>
+        {randomCourseName}
+      </NavLink>
+      <br />
+      <br />
+      <NavLink className="btn btn-light" to={`/learn/courses/tests`}>
+        tests
+      </NavLink>
+
       <Outlet />
     </div>
   );
